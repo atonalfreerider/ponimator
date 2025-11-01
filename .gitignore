@@ -4,3 +4,5 @@ misc/
 outputs/
 checkpoints/
 body_models/
+
+*.pyc

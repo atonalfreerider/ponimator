@@ -27,9 +27,7 @@ Interaction Animation</h1>
     <a href='https://arxiv.org/abs/2510.14976'><img src='https://img.shields.io/badge/arXiv-2510.14976-b31b1b.svg'  alt='Arxiv'></a>
     <a href='https://stevenlsw.github.io/ponimator/' style='padding-left: 0.5rem;'>
       <img src='https://img.shields.io/badge/Project-Page-blue?style=flat&logo=Google%20chrome&logoColor=blue' alt='Project Page'></a>
-    <!-- <a href='' style='padding-left: 0.5rem;'><img src='https://colab.research.google.com/assets/colab-badge.svg' alt='Google Colab'></a>
-    <a href='https://youtu.be/' style='padding-left: 0.5rem;'>
-      <img src='https://img.shields.io/badge/Youtube-Video-red?style=flat&logo=youtube&logoColor=red' alt='Youtube Video'></a> -->
+    <a href='ponimator_demo.ipynb' style='padding-left: 0.5rem;'><img src='https://colab.research.google.com/assets/colab-badge.svg' alt='Google Colab'></a>
   </p>
 
 </p>
@@ -43,8 +41,10 @@ This repository contains the pytorch implementation for the paper [Ponimator: Un
 ## 📄 Table of Contents
 
 - [Installation](#installation)
+- [Google Colab Demo](#google-colab-demo)
 - [Interactive Pose Animation Demo](#interactive-pose-animation-demo)
 - [Interactive Motion Generation Demo](#interactive-motion-generation-demo)
+- [JSON Export](#json-export)
 - [Training and Inference](#training-and-inference)
 - [Custom Third-party Scripts](#custom-third-party-scripts)
 - [Citation](#citation)
@@ -89,6 +89,18 @@ This repository contains the pytorch implementation for the paper [Ponimator: Un
     ├── contactmotion.ckpt
     ├── contactpose.ckpt
   ```
+
+## Google Colab Demo
+
+Try Ponimator in Google Colab without any local installation! The notebook supports both Colab and local environments:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](ponimator_demo.ipynb)
+
+**Features:**
+- ☁️ Run on Google Colab with GPU support
+- 💻 Also works on local Ubuntu machines
+- 📊 JSON export for motion data
+- 🚫 No visualization dependencies required (headless mode)
 
 ## Interactive Pose Animation Demo
 
@@ -135,6 +147,23 @@ This repository contains the pytorch implementation for the paper [Ponimator: Un
   |:---------------:|:--------------:|:----------------:|
   | <img src="data/motionx/Back_Flip_Kungfu_wushu_Trim9_clip1/image_ori.png" alt="MotionX Image" width="200"> | <img src="assets/motionx/vis_motion_pred.gif" alt="Motion GIF" width="200"> | <img src="assets/motionx/rendered_video.gif" alt="Render GIF" width="200"> |
 
+
+## JSON Export
+
+Export interactive motion data to structured JSON format for use in external applications:
+
+```Shell
+# With visualization disabled and JSON export enabled
+python scripts/run_pose2motion.py --data_dir data/buddi/Couple_6806 --save --disable_vis --export_json
+```
+
+The exported JSON contains:
+- SMPL-X parameters (shape, pose, translation) for each person
+- Gender information
+- Interactive frame index
+- All data in camera space coordinates
+
+See `ponimator/utils/json_export.py` for the export format.
 
 ## Custom Third-party Scripts
 - Estimate Interactive Pose by [Buddi](https://github.com/muelea/buddi), a custom script is at `third_party_scripts/buddi/custom_demo.sh`, put under same directory as `buddi` root dir.
